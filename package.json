@@ -3,25 +3,51 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate": "graphql-codegen --config src/app/api/graphql/codegen.server.ts && graphql-codegen --config src/features/api/codegen.client.ts && supabase gen types --local --lang=typescript > src/features/db/types.gen.ts",
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
+    "@apollo/server": "^4.12.2",
+    "@as-integrations/next": "^3.2.0",
+    "@story-protocol/core-sdk": "^1.3.2",
+    "@supabase/supabase-js": "^2.50.0",
+    "@tanstack/react-query": "^5.80.7",
+    "@tomo-inc/tomo-evm-kit": "^0.0.47",
+    "clsx": "^2.1.1",
+    "connectkit": "^1.9.1",
+    "graphql": "^16.11.0",
+    "next": "15.3.3",
+    "pinata": "^2.4.8",
+    "raw-loader": "^4.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.3"
+    "react-hook-form": "^7.57.0",
+    "react-icons": "^5.5.0",
+    "uuid": "^11.1.0",
+    "viem": "^2.31.2",
+    "wagmi": "^2.15.6"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@biomejs/biome": "^1.9.4",
+    "@eslint/eslintrc": "^3",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/client-preset": "^4.8.2",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-operations": "^4.6.1",
+    "@graphql-codegen/typescript-resolvers": "^4.5.1",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "daisyui": "^5.0.43",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
-    "@eslint/eslintrc": "^3"
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

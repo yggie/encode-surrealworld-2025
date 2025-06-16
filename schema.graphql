@@ -1,0 +1,115 @@
+type Query {
+    accounts(query: String): AccountsResponse!
+
+    account(id: String!): AccountResponse!
+    accountByWallet(walletAddress: String!): AccountResponse!
+}
+
+type Mutation {
+    createAccount(request: CreateAccountRequest!): CreateAccountResponse!
+    updateAccount(request: UpdateAccountRequest!): UpdateAccountResponse!
+
+    createIpAsset(request: CreateIpAssetRequest!): CreateIpAssetResponse!
+    addLicense(request: AddLicenseRequest!): AddLicenseResponse!
+}
+
+type Account {
+    id: String!
+    bio: String!
+    name: String!
+    age: Int
+    height: Int
+    ethnicity: String
+    walletAddress: String!
+    profileImageUrl: String
+    likenessIPAssetAddress: String
+}
+
+type AccountsResponse {
+    results: [Account!]!
+}
+
+type AccountResponse {
+    result: Account
+}
+
+input CreateAccountRequest {
+    name: String!
+    walletAddress: String!
+}
+
+type CreateAccountResponse {
+    accountId: String!
+}
+
+input UpdateAccountRequest {
+    name: String
+    bio: String
+    age: Int
+    height: Int
+    ethnicity: String
+    likenessIPAssetAddress: String
+}
+
+type UpdateAccountResponse {
+    accountId: String!
+}
+
+input CreateIpAssetRequest {
+    accountId: String!
+    imgIpfsHash: String!
+    imgHash: String!
+}
+
+type CreateIpAssetResponse {
+    ipId: String!
+}
+
+input AddLicenseRequest {
+    accountId: String!
+
+    # only one of the following should be defined
+    predefinedLicenseId: String
+    custom: CustomLicense
+    commercialUse: CommercialUseLicenseTemplate
+    commercialRemix: CommercialRemixLicenseTemplate
+    creativeCommonsAttribution: CreativeCommonsAttributionLicenseTemplate
+}
+
+input CreativeCommonsAttributionLicenseTemplate {
+    derivativeRevCeiling: Int!
+}
+
+input CommercialRemixLicenseTemplate {
+    defaultMintingFee: Int!
+    derivativeRevCeiling: Int!
+}
+
+input CommercialUseLicenseTemplate {
+    defaultMintingFee: Int!
+    derivativeRevCeiling: Int!
+}
+
+input CustomLicense {
+    defaultMintingFee: Int!
+    currencyAddress: String!
+    royaltyPolicyAddress: String!
+    transferable: Boolean!
+    expiration: Int!
+    commercialUse: Boolean!
+    commercialAttribution: Boolean!
+    commercializerCheckerAddress: String!
+    commercializerCheckerDataAddress: String!
+    commercialRevShare: Int!
+    commercialRevCeiling: Int!
+    derivativesAllowed: Boolean!
+    derivativesAttribution: Boolean!
+    derivativesApproval: Boolean!
+    derivativesReciprocal: Boolean!
+    derivativeRevCeiling: Int!
+    licenseUri: String!
+}
+
+type AddLicenseResponse {
+    success: Boolean!
+}
